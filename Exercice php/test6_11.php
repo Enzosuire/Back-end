@@ -44,6 +44,6 @@ echo "Le schtroumpf des deux tableaux est : ".$schtroumpf;
 
 
 
-
+ 
 
 ?>
