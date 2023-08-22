@@ -13,24 +13,25 @@
 
 
     </form>
-    
-
 
 <?php 
 
 if (isset($_POST ["parking"])==TRUE) {
     if (($handle= fopen ("occupation-parkings-temps-reel.csv", "r")) !== FALSE) {
-     while (($data = fgetcsv ($handle,30,";"))!== FALSE) {
+     while (($data = fgetcsv ($handle,1000,";"))!== FALSE) {
+            
          if ($_POST["parking"]==$data[0]) { 
             print $data [4] .PHP_EOL;
-           
-        }
+            print $data [6] ;
+            
+        }    
+        
+        }  
+       
     }
 
         fclose ($handle);
     }
-}
-
 
 
 ?>

@@ -24,8 +24,10 @@ if (isset($_POST ["arrondissement"])==TRUE) {
          if ($_POST["arrondissement"]==$data[5]) { 
             print "<br>";
             print $data [0] .PHP_EOL;
+            
            
         }
+        
     }
 
         fclose ($handle);
