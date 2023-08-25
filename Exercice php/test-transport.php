@@ -69,31 +69,28 @@ if (isset($_POST ["arret"])==TRUE) {
     }
 }
 
-
-$heure_actuelle = date('H:i:s') ; 
-echo "Heure actuelle : $heure_actuelle";
-
-if (($handle3 = fopen("bus-tram-circulation-passages.csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle3, 1000, ";")) !== FALSE) {
-        if ($_POST["arret"] == $data[14]) {
-            $horaires = explode(" ", $data[3]); 
-
-            $heure_actuelle = strtotime(date('H:i:s'));
-
-            foreach ($horaires as $horaire) {
-                $horaireBus = strtotime($horaire);
-
-                if ($data[3]> $heure_actuelle) {
-                    echo "<b>Prochain bus</b>: " . date('H:i', $horaireBus) . "<br>";
-                    
+if (isset($_POST["arret"])==true) {
+    if (($handle = fopen("https://data.angers.fr/api/explore/v2.1/catalog/datasets/bus-tram-circulation-passages/exports/csv?lang=fr&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B", "r")) !== FALSE) {
+        $min=100000;
+        $prochain=0;
+        while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+            
+            if ($_POST["arret"]==$data[14]) {
+                $duree=strtotime($data[3])-time();
+                if ($duree>0) {
+                    if ($duree<$min) {
+                        $min=$duree;
+                        $prochain=strtotime($data[3]);
+                    }
                     
                 }
+                
             }
         }
+        print date("d/m/Y H:i:s",$prochain);
+        fclose($handle);
     }
-    fclose($handle3);
 }
-
 
 ?>
 </body>
