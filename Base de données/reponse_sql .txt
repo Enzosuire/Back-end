@@ -92,6 +92,23 @@ SELECT libelle_continent,AVG(taux_mortalite_pays) FROM t_pays LEFT JOIN t_contin
 
 SELECT libelle_pays FROM t_pays WHERE libelle_pays LIKE 'A%'; 
 
+La population totale de l’Amérique (septentrionale, latine et caraïbes)
+
+SELECT SUM(population_pays) AS"Population totale de l'amérique" FROM t_pays LEFT JOIN t_continents ON (t_continents.id_continent=t_pays.continent_id) WHERE libelle_continent LIKE '%amérique%';
+
+La population totale de la Corée (Nord et Sud) 
+
+
+SELECT SUM(population_pays) FROM t_pays WHERE libelle_pays LIKE '%Corée%';
+
+- La population totale de la France (Métropole + DOM – TOM)
+
+SELECT SUM(population_pays) FROM t_pays WHERE libelle_pays LIKE '%France%';
+
+
+
+
+
 
 
 
