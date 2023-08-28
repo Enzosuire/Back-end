@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 25 août 2023 à 11:56
+-- Généré le : lun. 28 août 2023 à 16:56
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -20,6 +20,181 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `pays 1`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `continent_plus_faible_population`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `continent_plus_faible_population` (
+`libelle_continent` varchar(255)
+,`SUM(population_pays)` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `continent_plus_grande_population`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `continent_plus_grande_population` (
+`libelle_continent` varchar(255)
+,`SUM(population_pays)` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `moyenne_esperance_vie_pays_monde`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `moyenne_esperance_vie_pays_monde` (
+`AVG(esperance_vie_pays)` decimal(9,4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `moyenne_taux_mortalite_continent`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `moyenne_taux_mortalite_continent` (
+`libelle_continent` varchar(255)
+,`AVG(taux_mortalite_pays)` decimal(9,4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `moyenne_taux_mortalite_region_monde`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `moyenne_taux_mortalite_region_monde` (
+`Region du Monde` varchar(255)
+,`Taux de mortalité` decimal(9,4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `moyenne_taux_natalité_continent`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `moyenne_taux_natalité_continent` (
+`libelle_continent` varchar(255)
+,`AVG(taux_natalite_pays)` decimal(9,4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `moyenne_taux_natalité_region_monde`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `moyenne_taux_natalité_region_monde` (
+`libelle_region` varchar(255)
+,`Moyenne de taux de natalité` decimal(9,4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `pays_esperance_vie_meilleur`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `pays_esperance_vie_meilleur` (
+`Nom Pays` varchar(100)
+,`Espérance de vie` decimal(5,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `pays_nombre_enfant_par_femme_plus_fort`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `pays_nombre_enfant_par_femme_plus_fort` (
+`Nom Pays` varchar(100)
+,`Nombre d'enfant par femme` decimal(5,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `pays_population_plus_65_ans_plus_fort`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `pays_population_plus_65_ans_plus_fort` (
+`Nom de pays` varchar(100)
+,`Population >65 ans` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `pays_taux_mortalite_plus_faible`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `pays_taux_mortalite_plus_faible` (
+`Nom Pays` varchar(100)
+,`Taux de mortalité` decimal(5,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `pays_taux_mortalite_plus_fort`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `pays_taux_mortalite_plus_fort` (
+`Nom Pays` varchar(100)
+,`Taux de natalité` decimal(5,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `population_totale_continent`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `population_totale_continent` (
+`libelle_continent` varchar(255)
+,`SUM(population_pays)` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `population_totale_region`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `population_totale_region` (
+`libelle_region` varchar(255)
+,`SUM(population_pays)` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `region_plus_faible_population`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `region_plus_faible_population` (
+`libelle_region` varchar(255)
+,`SUM(population_pays)` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `region_plus_grande_population`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `region_plus_grande_population` (
+`libelle_region` varchar(255)
+,`SUM(population_pays)` decimal(32,0)
+);
 
 -- --------------------------------------------------------
 
@@ -310,6 +485,150 @@ INSERT INTO `t_regions` (`id_region`, `libelle_region`, `continent_id`) VALUES
 (18, 'Micronésie', 6),
 (19, 'Mélanésie', 6),
 (20, 'Polynésie', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `continent_plus_faible_population`
+--
+DROP TABLE IF EXISTS `continent_plus_faible_population`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `continent_plus_faible_population`  AS SELECT `t_continents`.`libelle_continent` AS `libelle_continent`, sum(`t_pays`.`population_pays`) AS `SUM(population_pays)` FROM (`t_pays` left join `t_continents` on(`t_continents`.`id_continent` = `t_pays`.`continent_id`)) GROUP BY `t_continents`.`libelle_continent` ORDER BY sum(`t_pays`.`population_pays`) ASC LIMIT 0, 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `continent_plus_grande_population`
+--
+DROP TABLE IF EXISTS `continent_plus_grande_population`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `continent_plus_grande_population`  AS SELECT `t_continents`.`libelle_continent` AS `libelle_continent`, sum(`t_pays`.`population_pays`) AS `SUM(population_pays)` FROM (`t_pays` left join `t_continents` on(`t_continents`.`id_continent` = `t_pays`.`continent_id`)) GROUP BY `t_continents`.`libelle_continent` ORDER BY sum(`t_pays`.`population_pays`) DESC LIMIT 0, 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `moyenne_esperance_vie_pays_monde`
+--
+DROP TABLE IF EXISTS `moyenne_esperance_vie_pays_monde`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `moyenne_esperance_vie_pays_monde`  AS SELECT avg(`t_pays`.`esperance_vie_pays`) AS `AVG(esperance_vie_pays)` FROM `t_pays` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `moyenne_taux_mortalite_continent`
+--
+DROP TABLE IF EXISTS `moyenne_taux_mortalite_continent`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `moyenne_taux_mortalite_continent`  AS SELECT `t_continents`.`libelle_continent` AS `libelle_continent`, avg(`t_pays`.`taux_mortalite_pays`) AS `AVG(taux_mortalite_pays)` FROM (`t_pays` left join `t_continents` on(`t_continents`.`id_continent` = `t_pays`.`continent_id`)) GROUP BY `t_continents`.`libelle_continent` ORDER BY avg(`t_pays`.`taux_mortalite_pays`) DESC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `moyenne_taux_mortalite_region_monde`
+--
+DROP TABLE IF EXISTS `moyenne_taux_mortalite_region_monde`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `moyenne_taux_mortalite_region_monde`  AS SELECT `t_regions`.`libelle_region` AS `Region du Monde`, avg(`t_pays`.`taux_mortalite_pays`) AS `Taux de mortalité` FROM (`t_pays` left join `t_regions` on(`t_regions`.`id_region` = `t_pays`.`region_id`)) GROUP BY `t_regions`.`libelle_region` ORDER BY avg(`t_pays`.`taux_mortalite_pays`) DESC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `moyenne_taux_natalité_continent`
+--
+DROP TABLE IF EXISTS `moyenne_taux_natalité_continent`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `moyenne_taux_natalité_continent`  AS SELECT `t_continents`.`libelle_continent` AS `libelle_continent`, avg(`t_pays`.`taux_natalite_pays`) AS `AVG(taux_natalite_pays)` FROM (`t_pays` left join `t_continents` on(`t_continents`.`id_continent` = `t_pays`.`continent_id`)) GROUP BY `t_continents`.`libelle_continent` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `moyenne_taux_natalité_region_monde`
+--
+DROP TABLE IF EXISTS `moyenne_taux_natalité_region_monde`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `moyenne_taux_natalité_region_monde`  AS SELECT `t_regions`.`libelle_region` AS `libelle_region`, avg(`t_pays`.`taux_natalite_pays`) AS `Moyenne de taux de natalité` FROM (`t_pays` left join `t_regions` on(`t_regions`.`id_region` = `t_pays`.`region_id`)) GROUP BY `t_regions`.`libelle_region` ORDER BY avg(`t_pays`.`taux_natalite_pays`) DESC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `pays_esperance_vie_meilleur`
+--
+DROP TABLE IF EXISTS `pays_esperance_vie_meilleur`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pays_esperance_vie_meilleur`  AS SELECT `t_pays`.`libelle_pays` AS `Nom Pays`, `t_pays`.`esperance_vie_pays` AS `Espérance de vie` FROM `t_pays` WHERE `t_pays`.`esperance_vie_pays` = (select max(`t_pays`.`esperance_vie_pays`) from `t_pays`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `pays_nombre_enfant_par_femme_plus_fort`
+--
+DROP TABLE IF EXISTS `pays_nombre_enfant_par_femme_plus_fort`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pays_nombre_enfant_par_femme_plus_fort`  AS SELECT `t_pays`.`libelle_pays` AS `Nom Pays`, `t_pays`.`nombre_enfants_par_femme_pays` AS `Nombre d'enfant par femme` FROM `t_pays` WHERE `t_pays`.`nombre_enfants_par_femme_pays` = (select max(`t_pays`.`nombre_enfants_par_femme_pays`) from `t_pays`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `pays_population_plus_65_ans_plus_fort`
+--
+DROP TABLE IF EXISTS `pays_population_plus_65_ans_plus_fort`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pays_population_plus_65_ans_plus_fort`  AS SELECT `t_pays`.`libelle_pays` AS `Nom de pays`, `t_pays`.`population_plus_65_pays` AS `Population >65 ans` FROM `t_pays` WHERE `t_pays`.`population_plus_65_pays` = (select max(`t_pays`.`population_plus_65_pays`) from `t_pays`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `pays_taux_mortalite_plus_faible`
+--
+DROP TABLE IF EXISTS `pays_taux_mortalite_plus_faible`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pays_taux_mortalite_plus_faible`  AS SELECT `t_pays`.`libelle_pays` AS `Nom Pays`, `t_pays`.`taux_mortalite_pays` AS `Taux de mortalité` FROM `t_pays` WHERE `t_pays`.`taux_mortalite_pays` = (select min(`t_pays`.`taux_mortalite_pays`) from `t_pays`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `pays_taux_mortalite_plus_fort`
+--
+DROP TABLE IF EXISTS `pays_taux_mortalite_plus_fort`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pays_taux_mortalite_plus_fort`  AS SELECT `t_pays`.`libelle_pays` AS `Nom Pays`, `t_pays`.`taux_natalite_pays` AS `Taux de natalité` FROM `t_pays` WHERE `t_pays`.`taux_natalite_pays` = (select max(`t_pays`.`taux_natalite_pays`) from `t_pays`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `population_totale_continent`
+--
+DROP TABLE IF EXISTS `population_totale_continent`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `population_totale_continent`  AS SELECT `t_continents`.`libelle_continent` AS `libelle_continent`, sum(`t_pays`.`population_pays`) AS `SUM(population_pays)` FROM (`t_pays` left join `t_continents` on(`t_continents`.`id_continent` = `t_pays`.`continent_id`)) GROUP BY `t_continents`.`libelle_continent` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `population_totale_region`
+--
+DROP TABLE IF EXISTS `population_totale_region`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `population_totale_region`  AS SELECT `t_regions`.`libelle_region` AS `libelle_region`, sum(`t_pays`.`population_pays`) AS `SUM(population_pays)` FROM (`t_pays` left join `t_regions` on(`t_regions`.`id_region` = `t_pays`.`region_id`)) GROUP BY `t_regions`.`libelle_region` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `region_plus_faible_population`
+--
+DROP TABLE IF EXISTS `region_plus_faible_population`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `region_plus_faible_population`  AS SELECT `t_regions`.`libelle_region` AS `libelle_region`, sum(`t_pays`.`population_pays`) AS `SUM(population_pays)` FROM (`t_pays` left join `t_regions` on(`t_regions`.`id_region` = `t_pays`.`region_id`)) GROUP BY `t_regions`.`libelle_region` ORDER BY sum(`t_pays`.`population_pays`) ASC LIMIT 0, 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `region_plus_grande_population`
+--
+DROP TABLE IF EXISTS `region_plus_grande_population`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `region_plus_grande_population`  AS SELECT `t_regions`.`libelle_region` AS `libelle_region`, sum(`t_pays`.`population_pays`) AS `SUM(population_pays)` FROM (`t_pays` left join `t_regions` on(`t_regions`.`id_region` = `t_pays`.`region_id`)) GROUP BY `t_regions`.`libelle_region` ORDER BY sum(`t_pays`.`population_pays`) DESC LIMIT 0, 1 ;
 
 --
 -- Index pour les tables déchargées

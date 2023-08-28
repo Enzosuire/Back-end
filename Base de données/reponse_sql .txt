@@ -1,0 +1,105 @@
+La liste des régions pour le continent « Europe »
+
+SELECT libelle_region FROM t_regions LEFT JOIN t_continents ON (t_regions.continent_id=t_continents.id_continent) WHERE libelle_continent LIKE 'europe'; 
+
+La liste des pays pour le continent « Europe »
+
+SELECT libelle_pays FROM t_pays WHERE continent_id=5; 
+
+La liste des pays pour la région « Afrique Centrale »
+
+SELECT libelle_pays FROM t_pays WHERE region_id=1;
+
+Le nombre de pays pour le continent « Océanie »
+
+SELECT COUNT(libelle_pays) FROM t_pays WHERE continent_id=6;
+
+Le nombre de régions pour le continent « Asie »
+
+SELECT COUNT(libelle_region) FROM t_regions WHERE continent_id=4;
+
+Le nombre de régions pour le continent « Amérique Septentrionale »
+
+SELECT COUNT(libelle_region) FROM t_regions WHERE continent_id=3; 
+
+La population totale par continent
+
+SELECT libelle_continent,SUM(population_pays) FROM t_pays LEFT JOIN t_continents ON (t_continents.id_continent=t_pays.continent_id) GROUP BY libelle_continent; 
+
+La population totale par région
+
+SELECT libelle_region,SUM(population_pays) FROM t_pays LEFT JOIN t_regions ON (t_regions.id_region=t_pays.region_id) GROUP BY libelle_region; 
+
+Le continent du monde disposant de la plus grande population
+
+SELECT libelle_continent,SUM(population_pays) FROM t_pays LEFT JOIN t_continents ON (t_continents.id_continent=t_pays.continent_id) GROUP BY libelle_continent  
+ORDER BY SUM(population_pays) DESC LIMIT 1;
+
+ La région du monde disposant de la plus grande population
+
+SELECT libelle_region,SUM(population_pays) FROM t_pays LEFT JOIN t_regions ON (t_regions.id_region=t_pays.region_id) GROUP BY libelle_region ORDER BY SUM(population_pays) DESC LIMIT 1;
+
+- Le continent du monde disposant de la plus faible population
+
+SELECT libelle_continent,SUM(population_pays) FROM t_pays LEFT JOIN t_continents ON (t_continents.id_continent=t_pays.continent_id) GROUP BY libelle_continent  
+ORDER BY SUM(population_pays) ASC LIMIT 1;
+
+- La région du monde disposant de la plus faible population
+
+SELECT libelle_region,SUM(population_pays) FROM t_pays LEFT JOIN t_regions ON (t_regions.id_region=t_pays.region_id) GROUP BY libelle_region ORDER BY SUM(population_pays) ASC LIMIT 1;
+
+- Le pays du monde où l’espérance vie est la meilleure
+
+SELECT libelle_pays AS 'Nom Pays',esperance_vie_pays AS 'Espérance de vie' FROM t_pays WHERE esperance_vie_pays=(SELECT MAX(esperance_vie_pays) FROM t_pays); 
+
+Le pays du monde où le taux de mortalité est le plus faible
+
+SELECT libelle_pays AS 'Nom Pays', taux_mortalite_pays AS 'Taux de mortalité' FROM t_pays WHERE taux_mortalite_pays=(SELECT MIN(taux_mortalite_pays) FROM t_pays); 
+
+ Le pays du monde où le taux de natalité est le plus fort
+
+SELECT libelle_pays AS 'Nom Pays', taux_natalite_pays AS 'Taux de natalité' FROM t_pays WHERE taux_natalite_pays=(SELECT MAX(taux_natalite_pays) FROM t_pays); 
+
+- Le pays du monde où le nombre d’enfants par femme est le plus fort
+
+SELECT libelle_pays AS 'Nom Pays', `nombre_enfants_par_femme_pays` AS "Nombre d'enfant par femme" FROM t_pays WHERE nombre_enfants_par_femme_pays=(SELECT MAX(nombre_enfants_par_femme_pays) FROM t_pays);
+ 
+- Le pays du monde où la population de plus de 65 ans est la plus forte
+
+SELECT libelle_pays AS "Nom de pays", population_plus_65_pays AS "Population >65 ans" FROM t_pays WHERE population_plus_65_pays=(SELECT MAX(population_plus_65_pays) FROM t_pays); 
+
+- La moyenne de l’espérance de vie pour tous les pays du monde
+
+SELECT AVG(esperance_vie_pays) FROM `t_pays`; 
+
+- La moyenne du taux de natalité par région du monde
+
+SELECT libelle_region,AVG(taux_natalite_pays) AS 'Moyenne de taux de natalité' FROM t_pays LEFT JOIN t_regions ON (t_regions.id_region=t_pays.region_id) GROUP BY libelle_region ORDER BY AVG(taux_natalite_pays) DESC; 
+
+- La moyenne du taux de natalité par continent
+
+SELECT libelle_continent,AVG(taux_natalite_pays) FROM t_pays LEFT JOIN t_continents ON (t_continents.id_continent=t_pays.continent_id) GROUP BY libelle_continent; 
+
+- La moyenne du taux de mortalité par région du monde
+
+SELECT libelle_region AS 'Region du Monde',AVG(taux_mortalite_pays) AS 'Taux de mortalité' FROM t_pays LEFT JOIN t_regions ON (t_regions.id_region=t_pays.region_id) GROUP BY libelle_region ORDER BY AVG(taux_mortalite_pays) DESC;
+
+- La moyenne du taux mortalité par continent
+
+SELECT libelle_continent,AVG(taux_mortalite_pays) FROM t_pays LEFT JOIN t_continents ON (t_continents.id_continent=t_pays.continent_id) GROUP BY libelle_continent ORDER BY AVG(taux_mortalite_pays) DESC; 
+ 
+- Tous les pays commençant par la lettre A (dans l’optique de pouvoir réaliser une recherche sur toutes les lettres de l’alphabet)
+
+SELECT libelle_pays FROM t_pays WHERE libelle_pays LIKE 'A%'; 
+
+
+
+
+
+
+
+
+
+
+
+
