@@ -96,14 +96,36 @@ La population totale de l’Amérique (septentrionale, latine et caraïbes)
 
 SELECT SUM(population_pays) AS"Population totale de l'amérique" FROM t_pays LEFT JOIN t_continents ON (t_continents.id_continent=t_pays.continent_id) WHERE libelle_continent LIKE '%amérique%';
 
-La population totale de la Corée (Nord et Sud) 
+-Le pourcentage de population de plus 65 ans par rapport à la population totale de chaque pays
+
+SELECT libelle_pays,TRUNCATE((population_plus_65_pays*100)/population_pays,2) FROM t_pays; 
+
+-La population totale de la Corée (Nord et Sud) 
 
 
-SELECT SUM(population_pays) FROM t_pays WHERE libelle_pays LIKE '%Corée%';
+SELECT SUM(population_pays) FROM t_pays WHERE libelle_pays IN ('Corée du Sud', 'Corée du Nord'); 
 
 - La population totale de la France (Métropole + DOM – TOM)
 
-SELECT SUM(population_pays) FROM t_pays WHERE libelle_pays LIKE '%France%';
+SELECT libelle_pays,SUM(population_pays) FROM t_pays WHERE libelle_pays IN ('Reunion','France (Metropolitaine)','Mayotte')
+
+- Les pays où le taux de natalité est supérieur ou égal à 17
+
+SELECT libelle_pays,taux_natalite_pays FROM t_pays WHERE taux_natalite_pays >=17; 
+
+- Les pays où la population totale dépasse les 20 M d’habitants
+
+SELECT libelle_pays,population_pays FROM t_pays WHERE population_pays >20000; 
+
+- Les pays où le taux de croissance démographique est négatif
+
+SELECT libelle_pays,taux_croissance_pays FROM t_pays WHERE taux_croissance_pays <0; 
+
+- La population totale de la Chine (Chine + Macao + Hong-Kong)
+
+SELECT libelle_pays,SUM(population_pays) FROM t_pays WHERE libelle_pays IN ('Chine', 'Chine - Macao', 'Chine - Hong Kong')
+
+
 
 
 
