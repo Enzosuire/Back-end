@@ -1,23 +1,32 @@
 
-2 / Ecrire les requêtes de sélection suivantes :
- Nombre de films par catégorie
+1/ Ecrire les requêtes de sélection suivantes :
 
-SELECT name as 'Catégorie',COUNT(title) as 'Nombre de film' FROM film LEFT JOIN film_category ON (film_category.category_id=film.film_id) LEFT JOIN category ON (category.category_id=film_category.category_id) GROUP BY name;  
+SELECT name as 'Catégorie',COUNT(title) as 'Nombre de film' FROM film INNER JOIN film_category ON (film_category.category_id=film.film_id) INNER JOIN category ON (category.category_id=film_category.category_id) GROUP BY name; 
 
-3/Nombre de films par catégorie dans l’inventaire de chaque magasin
+2/Nombre de films par catégorie dans l’inventaire de chaque magasin
 
-SELECT name as 'Catégorie', store.store_id as 'Numéro du Magasin', COUNT(title) as 'Nombre de films' FROM category LEFT JOIN film_category ON (category.category_id = film_category.category_id) LEFT JOIN film ON (film_category.film_id = film.film_id) LEFT JOIN inventory ON (film.film_id = inventory.film_id) LEFT JOIN store ON (inventory.store_id = store.store_id) GROUP BY name,store.store_id;
+SELECT store.store_id as 'Numéro du Magasin', name as 'Catégorie',COUNT(title) as 'Nombre de films' FROM category INNER JOIN film_category ON (category.category_id=film_category.category_id) INNER JOIN film ON (film_category.film_id=film.film_id) INNER JOIN inventory ON (film.film_id= inventory.film_id) INNER JOIN store ON (inventory.store_id=store.store_id) GROUP BY name,store.store_id ORDER BY store.store_id,name ASC; 
 
-4/Nombre d’acteurs par film trié par ordre alphabétique sur le titre du film
+3/Nombre d’acteurs par film trié par ordre alphabétique sur le titre du film
 
-SELECT COUNT(title) as 'Nombre de film' FROM film LEFT JOIN film_actor ON (film_actor.actor_id=film.film_id);
+SELECT title as 'Titre du film' ,COUNT(actor.actor_id) as "Nombre d'acteurs" FROM film INNER JOIN film_actor ON (film_actor.film_id=film.film_id) INNER JOIN actor ON (actor.actor_id=film_actor.actor_id) GROUP BY title ORDER BY title ASC; 
 
+4/Le top 10 des films les plus loués
 
+SELECT title as 'Titre du film' ,COUNT(rental.rental_id) as "Nombre de locations" FROM film LEFT JOIN inventory ON (inventory.film_id=film.film_id) LEFT JOIN rental ON (rental.inventory_id=inventory.inventory_id) GROUP BY title ORDER BY COUNT(rental.rental_id) DESC LIMIT 10; 
 
+5/Le nombre de clients par magasin
 
+SELECT store.store_id AS'Numéro de magasin',city.city AS 'Ville',COUNT(customer.customer_id) AS 'Nombre de clients' FROM store LEFT JOIN customer ON (store.store_id = customer.store_id) LEFT JOIN address ON (store.address_id = address.address_id) LEFT JOIN city ON (address.city_id = city.city_id) GROUP BY store.store_id, city.city; 
 
+6/Le montant des revenus des locations pour chaque magasin
 
+SELECT store.store_id AS 'Numéro de magasin', SUM(payment.amount) AS 'Revenus des locations' FROM store INNER JOIN staff ON (store.store_id=staff.store_id) INNER JOIN rental ON (staff.staff_id= rental.staff_id) INNER JOIN payment ON (rental.rental_id = payment.rental_id) GROUP BY store.store_id; 
 
+7/Dans le but d’une campagne emailing au Canada, afficher les noms, prénoms et emails des clients actifs sur le
+territoire du Canada
+
+SELECT first_name AS 'Prénom',last_name AS 'Nom',email AS 'Courriel'FROM customer LEFT JOIN address ON (address.address_id=customer.address_id) LEFT JOIN city ON (city.city_id=address.city_id) LEFT JOIN country ON (country.country_id=city.country_id) WHERE country LIKE '%Canada%' AND active=1; 
 
 
 
