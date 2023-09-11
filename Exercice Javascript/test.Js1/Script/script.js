@@ -68,3 +68,7 @@ switch (compteur) {
 
 buttonElt.innerText = "ENVOYER";
 
+
+
+
+
