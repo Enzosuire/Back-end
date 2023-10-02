@@ -64,11 +64,11 @@
 // EX 5 
 
 
-function bool($var ){
-    if($var) echo 'TRUE<br>';
-    else echo 'FALSE<br>';
+// function bool($var ){
+//     if($var) echo 'TRUE<br>';
+//     else echo 'FALSE<br>';
 
-}
+// }
 
 // bool(""==FALSE); c'est vrai puisque q'une chaine de caractere vide ne contient rien
 // echo "<br>";
