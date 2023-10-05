@@ -12,21 +12,22 @@ try {
 
     
     $res = $req->fetchAll();
-    echo "<div class=\"container-fluid mt-3\">";
+    echo "<div class=\"container-fluid mt-3 \">";
     echo "<div class=\"row\">";
    
     foreach ($res as $key => $value) {
-        echo "<div class=\"col-3 p-3 text-center\">";
-        echo "<div class=\"card  mx-auto p-3\" style=\"width: 16rem;\">";
-        echo "<img class=\"card-img-top\" src=\"../Exercice-Bootic/inc/img/$value[12]/$value[8].webp\" alt=\"Card image cap\">";
+        echo "<div class=\"col-lg-3 col-12  col-md-4 p-3 text-center\">";
+        echo "<div class=\"card   mx-auto p-3\" style=\"width: 16rem;\">";
+        echo "<img class=\"card-img-top\" src=\"../Exercice-Bootic1/inc/img/$value[12]/$value[8].webp\" alt=\"Card image cap\">";
         echo "<div class=\"card-body\">";
         echo "<h5 class=\"card-title text-center\">$value[3]</h5>";
         echo "<p class=\"card-text text-center \">$value[9] €  </p>";
-        echo "<a href=\"#\" class=\"btn btn-outline-dark \">Acheter</a>";
-        echo "<a href=\"#\" class=\"btn btn-outline-dark\">Détails</a>";
+        echo "<a href=\"panier.php?id=$value[0]\" class=\"btn btn-outline-dark m-2\">Acheter</a>";
+        echo "<a href=\"produit.php?id=$value[0]\" class=\"btn btn-outline-dark\">Détails</a>";
         echo "</div>";
         echo "</div>";
         echo "</div>";  
+     
 
     }
 
