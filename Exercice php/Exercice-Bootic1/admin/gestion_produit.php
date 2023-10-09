@@ -1,7 +1,97 @@
 <?php include '../inc/img/header.inc.php';
 
 
+echo' <div class="container mt-5 w-75  p-5 form-inscription">
+        
+<div class="row justify-content-center">
+    <div class=" w-100 border border-dark p-5">
+        <form method="post" action="data.php" >
+            <h1 class="text-center">Gestion de produit </h1>
+            <div class="row">
+                <div class="form-group col-6">
+                <label for="inputreference">Référence:</label>
+                <textarea type="Pseudo" class="form-control" name="reference" id="reference" placeholder=""></textarea>
+                </div>
+                <div class="form-group col-6">
+                <label for="inputcategorie">Catégorie:</label>
+                <textarea type="password" class="form-control"  name="categorie" id="categorie" placeholder=""></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                <label for="inputtitre">Titre:</label>
+                <textarea type="titre" class="form-control" name="titre" id="titre" placeholder=""></textarea>
+                </div>
+                <div class="form-group col-6">
+                <label for="inputDescription">Description:</label>
+                <textarea type="description" class="form-control" name="Description" id="Description" placeholder=""></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                <label for="inputcouleur">Couleur:</label>
+                <textarea type="pseudo" class="form-control" name="couleur" id="couleur" placeholder=""></textarea>
+                </div>
+                <div class="form-group col-6 ">
+                <p> Sexe : </p>
+                <input class="form-check-input" type="radio" name="genre" id="gridRadios1" value="Homme" checked>
+                <label class="form-check-label" for="gridRadios">
+                   Homme
+                </label>
+                <input class="form-check-input" type="radio" name="genre" id="gridRadios2" value="Femme">
+                <label class="form-check-label" for="gridRadios2">
+                    Femme
+                </label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-6 ">
+                <label for="inputPrix">Prix:</label>
+                <textarea type="text" class="form-control" name="Prix" id="Prix" placeholder=""></textarea>
+                </div>
+                <div class="form-group col-6">
+                <label for="inputStock">Stock:</label>
+                <textarea type="text" class="form-control" name="stock" id="stock"></textarea>
+                </div>
+            </div>
+            
+            <div class="row mt-2">
+                    <div class="form-group col-6">
+                    <label for="Select" class="form-label">Taille:</label>
+                    <select id="Select"class="form-control" name="taille">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XLL">XXL</option>
+                    </select>
+                    </div>
+                    <div class="form-group col-6 mt-2">
+                    <label for="inputphoto">Photo:</label>
+                    <td class= "text-center" colspan="2"><img src="../inc/img/.webp" width="80rem"  "class="card-img-top mt-3"alt="..." ></td >
+                    <input type="file" name="parcourir" class="form-control mt-2" id="inputCity">
+                    </div>
+            </div>
+            <div class="row justify-content-center mt-2"> 
+            <input type="submit" class="btn btn-outline-dark mt-3 col-3 " value ="Modification du produit">
 
+                
+            </div>
+
+        </form>
+
+        
+
+    </div>
+
+</div>
+
+</div>';
+
+
+include '../inc/img/footer.inc.php'; ?>
+
+<!-- 
 try {
     $username = "root";
     $password = '';
@@ -13,6 +103,7 @@ try {
 
     
     $res = $req->fetchAll();
+   
   
    
     foreach ($res as $key => $value) {
@@ -109,9 +200,4 @@ try {
 
 } catch (PDOException $e) {
     echo 'Erreur : ' . $e->getMessage();
-}
-
-
-include '../inc/img/footer.inc.php'; ?>
-
-
+} -->

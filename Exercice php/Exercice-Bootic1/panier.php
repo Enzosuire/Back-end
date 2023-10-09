@@ -4,14 +4,14 @@
 
 
 
-<div class="container mt-5 w-75  form-panier">
+<div class="container mt-2 w-75  p-5  form-panier">
     <div class="row justify-content-center">
         <div class="text-center w-100 border border-dark p-5">
             <form class="">
                 <h1>Panier</h1>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="mb-3 col-6 mx-auto d-flex justify-content-center  mt-5">
+                        <div class="mb-3 col-6 mx-auto d-flex justify-content-center  mt-">
                             <div class="card" style="width: 20rem;">
                                 <img src="./inc/img/t_shirt/ts_azur.webp"class="card-img-top mt-3" alt="...">
                                 <div class="card-body">
@@ -43,3 +43,4 @@
 
 
 <?php include './inc/img/footer.inc.php'; ?>
+

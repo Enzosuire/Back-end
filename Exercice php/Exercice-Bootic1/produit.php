@@ -16,10 +16,16 @@
     
     $res = $req->fetchAll();
     echo "<div class=\"container-fluid mt-3 \">";
+
+
+
+
+
+    
     echo "<div class=\"row\">";
    
     foreach ($res as $key => $value) {
-     echo' <div class="container mt-5 w-75  form-produit">
+     echo' <div class="container mt-2 w-75  p-5 form-produit">
          <div class="row justify-content-center">
              <div class="text-center w-100 border border-dark p-5">
                  <form class="">
