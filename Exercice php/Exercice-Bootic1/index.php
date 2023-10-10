@@ -65,7 +65,7 @@ try {
     foreach ($res as $key => $value) {
         echo "<div class=\"col-lg-3 col-12  col-md-4 p-3 text-center\">";
         echo "<div class=\"card   mx-auto p-3\" style=\"width: 16rem;\">";
-        echo "<img class=\"card-img-top\" src=\"../Exercice-Bootic1/inc/img/$value[12]/$value[8].webp\" alt=\"Card image cap\">";
+        echo "<img class=\"card-img-top\" src=\"../Exercice-Bootic1/inc/img/$value[8]\" alt=\"Card image cap\">";
         echo "<div class=\"card-body\">";
         echo "<h5 class=\"card-title text-center\">$value[3]</h5>";
         echo "<p class=\"card-text text-center \">$value[9] €  </p>";

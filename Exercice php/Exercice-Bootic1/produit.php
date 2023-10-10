@@ -15,13 +15,7 @@
 
     
     $res = $req->fetchAll();
-    echo "<div class=\"container-fluid mt-3 \">";
-
-
-
-
-
-    
+    echo "<div class=\"container-fluid mt-3 \">";  
     echo "<div class=\"row\">";
    
     foreach ($res as $key => $value) {

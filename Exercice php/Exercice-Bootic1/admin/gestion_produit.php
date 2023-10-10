@@ -1,11 +1,26 @@
 <?php include '../inc/img/header.inc.php';
 
 
+$product_id = $_GET['id'];
+$CreationP = $_GET['action'];
+   
+try {
+   $username = "root";
+   $password = '';
+   $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
+   $db = new PDO($dsn, $username, $password);
+   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+   $req = $db->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie)');
+
+   
+$res = $req->fetchAll();
+if ($CreationP == "C") {
 echo' <div class="container mt-5 w-75  p-5 form-inscription">
         
 <div class="row justify-content-center">
     <div class=" w-100 border border-dark p-5">
-        <form method="post" action="data.php" >
+        <form method="post" action="data.php" enctype="multipart/form-data">
             <h1 class="text-center">Gestion de produit </h1>
             <div class="row">
                 <div class="form-group col-6">
@@ -42,6 +57,10 @@ echo' <div class="container mt-5 w-75  p-5 form-inscription">
                 <label class="form-check-label" for="gridRadios2">
                     Femme
                 </label>
+                <input class="form-check-input" type="radio" name="genre" id="gridRadios3" value="Mixte">
+                <label class="form-check-label" for="gridRadios3">
+                    Mixte
+                </label>
                 </div>
             </div>
             <div class="row mt-2">
@@ -69,7 +88,7 @@ echo' <div class="container mt-5 w-75  p-5 form-inscription">
                     <div class="form-group col-6 mt-2">
                     <label for="inputphoto">Photo:</label>
                     <td class= "text-center" colspan="2"><img src="../inc/img/.webp" width="80rem"  "class="card-img-top mt-3"alt="..." ></td >
-                    <input type="file" name="parcourir" class="form-control mt-2" id="inputCity">
+                    <input type="file" name="file" class="form-control mt-2" id="image">
                     </div>
             </div>
             <div class="row justify-content-center mt-2"> 
@@ -88,30 +107,22 @@ echo' <div class="container mt-5 w-75  p-5 form-inscription">
 
 </div>';
 
+}
 
-include '../inc/img/footer.inc.php'; ?>
 
-<!-- 
-try {
-    $username = "root";
-    $password = '';
-    $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
-    $db = new PDO($dsn, $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+elseif ($CreationP == "U") {
 
-    $req = $db->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie)');
+    $req = $db->query('SELECT * FROM t_produit INNER JOIN t_categorie ON (t_produit.id_categorie = t_categorie.id_categorie) WHERE id_produit = '. $product_id);
 
     
     $res = $req->fetchAll();
-   
-  
    
     foreach ($res as $key => $value) {
      echo' <div class="container mt-5 w-75  p-5 form-inscription">
         
      <div class="row justify-content-center">
          <div class=" w-100 border border-dark p-5">
-             <form>
+         <form method="post" action="data.php" enctype="multipart/form-data">
                  <h1 class="text-center">Gestion de produit </h1>
                  <div class="row">
                      <div class="form-group col-6">
@@ -140,13 +151,17 @@ try {
                      </div>
                      <div class="form-group col-6 ">
                      <p> Sexe : </p>
-                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="">
+                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Homme" checked>
                      <label class="form-check-label" for="gridRadios">
                         Homme
                      </label>
-                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="">
+                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Femme">
                      <label class="form-check-label" for="gridRadios2">
                          Femme
+                     </label>
+                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Mixte">
+                     <label class="form-check-label" for="gridRadios">
+                       Mixte
                      </label>
                      </div>
                  </div>
@@ -176,7 +191,7 @@ try {
                        <div class="form-group col-6 mt-2">
                          <label for="inputphoto">Photo:</label>
                          <td class= "text-center" colspan="2"><img src="../inc/img/'.$value[12].'/'.$value[8].'.webp" width="80rem"  "class="card-img-top mt-3"'.$value[3].' alt="..." ></td >
-                         <input type="file" name="parcourir" class="form-control mt-2" id="inputCity">
+                         <input type="file" name="file" class="form-control mt-2" id="image">
                          </div>
                  </div>
                  <div class="row justify-content-center mt-2"> 
@@ -197,7 +212,11 @@ try {
 
     }
    
+}
 
 } catch (PDOException $e) {
     echo 'Erreur : ' . $e->getMessage();
-} -->
+}
+
+include '../inc/img/footer.inc.php'; ?>
+
