@@ -1,6 +1,12 @@
 <?php 
 include '../inc/img/header.inc.php'; 
 
+
+$CreationP = $_GET['action'];
+
+
+if ($CreationP == "C") {
+
 if (isset($_FILES['file'])) {
     $tmpName = $_FILES['file']['tmp_name'];
     $name = $_FILES['file']['name'];
@@ -98,8 +104,11 @@ try {
     echo 'Erreur : ' . $e->getMessage();
 }
 
+}
 
 
+
+elseif ($CreationP == "U") {
 
 
 
@@ -119,14 +128,21 @@ $extensions = ['jpg', 'png', 'jpeg', 'gif','webp'];
 //Taille max que l'on accepte
 $maxSize = 400000;
 
-if (in_array($extension, $extensions) && $size <= $maxSize && $error == 0) {
-    move_uploaded_file($tmpName, '../inc/img/' . $name);
-} else {
-    echo "Une erreur est survenue";
-}
+    if (in_array($extension, $extensions) && $size <= $maxSize && $error == 0) {
+        move_uploaded_file($tmpName, '../inc/img/' . $name);
+    } else {
+        echo "Une erreur est survenue";
+    } 
+// } else{
+//     $name = $_POST['photo']; 
+// }
 
 
 
+
+
+
+$product_id = $_POST['product_id'];
 $reference = $_POST['reference'];
 $categorie = $_POST['categorie'];
 $titre = $_POST['titre'];
@@ -160,6 +176,9 @@ $taille = strtoupper($_POST['taille']);
 // echo $name ;
 
 
+
+$product_id = $_GET['id'];
+
 try {
     $username = "root";
     $password = '';
@@ -167,8 +186,8 @@ try {
     $db = new PDO($dsn, $username, $password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = ('UPDATE t_produit SET (reference =:reference, id_categorie= :id_categorie, titre=:titre, description = :description , couleur = :couleur, taille = :taille, public, photo, prix, stock) 
-    VALUES (:reference, :categorie, :titre, :description, :couleur, :taille, :sexe, :name, :prix, :stock)');
+    $sql = 'UPDATE t_produit SET reference = :reference, id_categorie = :categorie, titre = :titre, description = :description, couleur = :couleur, taille = :taille, public = :sexe, photo = :name, prix = :prix, stock = :stock WHERE id_produit = :product_id';
+   
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':reference', $reference, PDO::PARAM_STR);
@@ -181,6 +200,7 @@ try {
     $stmt->bindValue(':name', $name, PDO::PARAM_STR);
     $stmt->bindValue(':prix', $prix, PDO::PARAM_INT);
     $stmt->bindValue(':stock', $stock, PDO::PARAM_INT);
+    $stmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
     
 
     if ($stmt->execute()){
@@ -199,10 +219,43 @@ try {
 } catch (PDOException $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
-include '../inc/img/footer.inc.php';
 
 
+}
 
-?>
+elseif ($CreationP == "D") { 
+    
+        $product_id = $_GET['id'];
+
+        try {
+            $username = "root";
+            $password = '';
+            $dsn = 'mysql:host=localhost;dbname=dbbootic;port=3306;charset=utf8';
+            $db = new PDO($dsn, $username, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $db->prepare ('DELETE FROM t_produit WHERE id_produit = :product_id');
+
+            
+            $stmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
+
+            if ($stmt->execute()){
+                echo '
+                <div class="row justify-content-center">
+                <div class=" w-100 border border-dark p-5">
+                    <h4 class="text-center">Le produit a été supprimé avec succès.</h4>.
+                    <div class="text-center"><a class="text-black  text-decoration-none" href="gestion_boutique.php"><input type="button"class="btn btn-outline-dark mt-3 col-3 "value ="Retour vers le gestionnaire de boutique"></a></div>
+                </div>
+                </div>';
+            } else {
+                echo"Une erreur est survenue lors de la suppression du produit.";
+            }
+
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+    }
+
+include '../inc/img/footer.inc.php';?>
 
 

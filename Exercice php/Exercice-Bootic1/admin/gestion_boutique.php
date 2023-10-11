@@ -88,7 +88,7 @@ try {
     </tr>
     <tr>
       <th scope="row">Suppresion</th>
-      <td class= "text-center" colspan="2"><a href="gestion_boutique.php"?action=C&id=" class="text-decoration-none text-dark"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+      <td class= "text-center" colspan="2"><a href="data.php?action=D&id='.$value[0].'" class="text-decoration-none text-dark bouton_delet "><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
   <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
 </svg></a></td >
@@ -110,3 +110,22 @@ try {
 
 
 include '../inc/img/footer.inc.php'; ?>
+
+<script>
+
+var deleteButtons = document.querySelectorAll(".bouton_delet");
+
+deleteButtons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+        event.preventDefault(); // Empêche le comportement par défaut du lien
+
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette ligne ?");
+
+        if (confirmation) {
+            // Redirigez l'utilisateur vers le lien spécifié
+            window.location.href = button.getAttribute("href");
+        }
+    });
+});
+</script>
+
