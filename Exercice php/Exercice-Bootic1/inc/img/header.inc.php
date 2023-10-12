@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row d-flex align-items-center"> 
                 <div class="col-4"> 
-                    <h4><a href="index.php " class="titre text-decoration-none text-light"> BO<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alexa" viewBox="0 0 16 16">
+                    <h4><a href="/Exercice-Bootic1/index.php" class="titre text-decoration-none text-light"> BO<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alexa" viewBox="0 0 16 16">
                         <path d="M7.996 0A7.998 7.998 0 0 0 0 8a8 8 0 0 0 6.93 7.93v-1.613a1.06 1.06 0 0 0-.717-1.008A5.602 5.602 0 0 1 2.4 7.865 5.579 5.579 0 0 1 8.054 2.4a5.599 5.599 0 0 1 5.535 5.81l-.002.046a6.116 6.116 0 0 1-.012.192l-.005.061a4.85 4.85 0 0 1-.033.284l-.01.068c-.685 4.516-6.564 7.054-6.596 7.068A7.998 7.998 0 0 0 15.992 8 7.998 7.998 0 0 0 7.996.001Z"/>
                       </svg>TIC</a></h4>
                 </div>
@@ -29,16 +29,16 @@
                         <div class="collapse navbar-collapse text-light " id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active text-light" aria-current="page" href="inscription.php">Inscription</a>
+                                    <a class="nav-link active text-light" aria-current="page" href="/Exercice-Bootic1/inscription.php">Inscription</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="connexion.php">Connexion</a>
+                                    <a class="nav-link text-light" href="/Exercice-Bootic1/connexion.php">Connexion</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="index.php">Accès à la boutique</a>
+                                    <a class="nav-link text-light" href="/Exercice-Bootic1/index.php">Accès à la boutique</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="panier.php"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                    <a class="nav-link text-light" href="/Exercice-Bootic1/panier.php"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
   <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
 </svg> Voir votre Panier</a>
                                 </li>
