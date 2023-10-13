@@ -10,15 +10,15 @@ $CreationP = $_GET['action'];
 if ($CreationP == "C") {
 
 
-$pseudo = strtoupper($_POST['pseudo']);
+$pseudo = htmlspecialchars(strtoupper($_POST['pseudo']));
 $mdp = $_POST['mdp'];
-$nom = strtoupper($_POST['nom']);
-$prenom = strtoupper($_POST['prenom']);
-$email = $_POST['email'];
-$sexe =  $_POST['civilite'];
-$adresse = $_POST['adresse'];
-$ville = $_POST['ville'];
-$cp = $_POST['cp'];
+$nom = htmlspecialchars(strtoupper($_POST['nom']));
+$prenom = htmlspecialchars(strtoupper($_POST['prenom']));
+$email = htmlspecialchars($_POST['email']);
+$sexe =  htmlspecialchars($_POST['civilite']);
+$adresse = htmlspecialchars($_POST['adresse']);
+$ville = htmlspecialchars($_POST['ville']);
+$cp = htmlspecialchars($_POST['cp']);
 
 
 
@@ -85,15 +85,9 @@ try {
 }
 
 
-}
-
-
-if ($CreationP == "CO") {
-
-
-    $pseudo = strtoupper($_POST['pseudo']);
-    $mdp = $_POST['mdp'];
-
+} else {
+    $pseudo = htmlspecialchars(strtoupper($_POST['pseudo']));
+    $mdp = htmlspecialchars($_POST['mdp']);
     
     try {
         $username = "root";
@@ -102,40 +96,40 @@ if ($CreationP == "CO") {
         $db = new PDO($dsn, $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = "SELECT  (pseudo, mdp FROM t_membre WHERE pseudo = :pseudo)";
-    
-             
+        $sql = "SELECT * FROM t_membre WHERE pseudo = ?";  
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindValue(1, $pseudo, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['mdp'])) {
-           
-            $_SESSION['pseudo'] = $user ['pseudo'];
-            echo '<div class="row justify-content-center">
-                <div class="w-100 border border-dark p-5">
-                    <h4 class="text-center">Vous êtes connecté.</h4>
+        if ($user) {
+            if (password_verify($mdp, $user['mdp'])) {
+                $_SESSION['pseudo'] = $user['pseudo'];
+                header('Location: ./../profil.php');
+            } else {
+                echo '<div class="row justify-content-center">
+                    <div class="w-100 border border-dark p-5">
+                    <h4 class="text-center">Mot de passe incorrect.</h4>
                     <div class="text-center"><a class="text-black text-decoration-none" href="/Exercice-Bootic1/index.php">
-                    <input type="button" class="btn btn-outline-dark mt-3 col-3" value="Retour vers le gestionnaire de boutique"></a></div>
-                </div>
-            </div>';
+                    <input type="button" class="btn btn-outline-dark mt-3 col-3" value="Retour vers la boutique"></a></div>
+                    </div>
+                </div>';
+            }
         } else {
-            
-        
             echo '<div class="row justify-content-center">
                 <div class="w-100 border border-dark p-5">
-                    <h4 class="text-center">Login incorrecte</h4>
+                    <h4 class="text-center">Vous n\'êtes pas inscrit.</h4>
+                    <div class="text-center"><a class="text-black text-decoration-none" href="/Exercice-Bootic1/index.php">
+                    <input type="button" class="btn btn-outline-dark mt-3 col-3" value="Retour vers la boutique"></a></div>
                 </div>
             </div>';
-        
-         }
-        } catch (PDOException $e) {
-        echo 'Erreur : ' . $e->getMessage();
-
         }
-    
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+    }
 }
-    
 include '../inc/img/footer.inc.php';?>
+
+
+
 

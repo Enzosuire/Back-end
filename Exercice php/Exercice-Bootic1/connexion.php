@@ -1,5 +1,13 @@
 
 <?php include './inc/img/header.inc.php'; ?>
+<?php
+session_start();
+
+// on vérifie que la variable de session pseudo existe
+if (isset($_SESSION['pseudo'])) {
+    $pseudo = $_SESSION['pseudo'];
+}
+?>
 
     <div class="container mt-5 w-75 p-5 form-connexion">
         
