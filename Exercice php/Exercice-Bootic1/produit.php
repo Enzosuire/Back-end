@@ -28,7 +28,7 @@
                          <div class="row">
                              <div class="mb-3 col-6 mx-auto d-flex justify-content-center">
                                  <div class="card" style="width: 20rem;">
-                                     <img src="../Exercice-Bootic1/inc/img/'.$value[12].'/'.$value[8].'.webp"class="card-img-top mt-3" alt="...">
+                                     <img src="./../Exercice-Bootic1/inc/img/'.$value[8].'"class="card-img-top mt-3" alt="...">
                                      <div class="card-body">
                                          <h5 class="card-title">'.$value[3].'</h5>
                                          <p class="card-text"> '.$value[4].'</p>
@@ -38,7 +38,7 @@
                              </div>
                          </div>
                      </div>
-                     <a href="panier.php?id=$value[0]" class="btn btn-outline-dark">Accéder au panier</a>
+                     <a href="panier.php?id=<?= $product_id ?>" class="btn btn-outline-dark">Accéder au panier</a>
                     
                  </form>
              </div>

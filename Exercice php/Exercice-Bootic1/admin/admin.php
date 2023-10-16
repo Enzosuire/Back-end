@@ -2,6 +2,8 @@
 
 session_start();
 
+
+
 include '../inc/img/header.inc.php'; 
 
 $CreationP = $_GET['action'];
@@ -85,7 +87,8 @@ try {
 }
 
 
-} else {
+
+} elseif ($CreationP == "CO") {
     $pseudo = htmlspecialchars(strtoupper($_POST['pseudo']));
     $mdp = htmlspecialchars($_POST['mdp']);
     
@@ -96,9 +99,9 @@ try {
         $db = new PDO($dsn, $username, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        $sql = "SELECT * FROM t_membre WHERE pseudo = ?";  
+        $sql = "SELECT * FROM t_membre WHERE pseudo = :pseudo";  // Utilisez un paramètre nommé ici pour éviter les injections SQL
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(1, $pseudo, PDO::PARAM_STR);
+        $stmt->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -106,6 +109,7 @@ try {
             if (password_verify($mdp, $user['mdp'])) {
                 $_SESSION['pseudo'] = $user['pseudo'];
                 header('Location: ./../profil.php');
+                exit(); // Assurez-vous de sortir du script après une redirection
             } else {
                 echo '<div class="row justify-content-center">
                     <div class="w-100 border border-dark p-5">
@@ -128,6 +132,18 @@ try {
         echo 'Erreur : ' . $e->getMessage();
     }
 }
+
+
+    $logout = isset($_GET['logout']);
+if ($logout == 1) {
+    session_destroy();
+    header('Location: ./../connexion.php');
+}
+
+
+
+
+
 include '../inc/img/footer.inc.php';?>
 
 
