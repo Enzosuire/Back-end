@@ -17,33 +17,49 @@ class Compte{
         $this->solde = $somme;
         
     }
-    public function voirSolde(){
+    public function getSolde(){
 
-        echo"Le solde du compte est de $this->solde €. ";
+        return"Le solde du compte est de $this->solde €. ";
 
 }
 
-public function dePoser( float $sommeajout){
+
+public function setSolde( float $somme){
 
 
-  echo " Le somme déposée est de : " .$this->solde + $sommeajout ;
+    if ($somme >=0 ){
+    $this->solde = $somme ;
+    }
+    return $this->solde;
+     
+  
+}
+
+
+public function getdePoser( float $sommeajout){
+
+
+  return " Le somme déposée est de : " .$this->solde + $sommeajout ;
   
    
 
 }
 
-public function reTirer( float $retirer){
+public function getreTirer( float $retirer){
 
     if ($retirer > 0 &&  $retirer <= $this->solde ) {
        
-        echo " Le montant a retiré est de : " . $this->solde - $retirer;  
+        return " Le montant a retiré est de : " . $this->solde - $retirer;  
     }else{
-        echo "On peux pas retirer de montant";
+        return "On peux pas retirer de montant";
     }
 
    
   
   }
 
+// to string ca renvoie une chaîne de caractères représentant l'objet
+
+  
 
 }//Fermeture de la classes
