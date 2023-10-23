@@ -1,5 +1,8 @@
 <?php
 
+
+namespace APP\classes;
+
 class CompteCourant extends Compte {
 
 

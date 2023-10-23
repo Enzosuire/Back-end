@@ -1,10 +1,14 @@
 <?php
-require_once('heritage/Compte.php');
-require_once('heritage/CompteCourant.php');
-require_once('heritage/CompteEpargne.php');
-require_once('heritage/Client/Compte.php');
+require_once('classes/heritage/Compte.php');
+require_once('classes/heritage/CompteCourant.php');
+require_once('classes/heritage/CompteEpargne.php');
+require_once('classes/heritage/Client/Compte.php');
 
 
+
+use AP\classes\CompteCourant AS CompteCourant;
+
+use APP\classes\CompteEpargne AS CompteEpargne;
 
 $compte1 = new CompteCourant("stephane", 1000 , 500);
 

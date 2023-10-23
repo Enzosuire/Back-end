@@ -1,5 +1,7 @@
 <?php
 
+
+namespace APP\classes;
 abstract class Compte{
 
     private $titulaire;

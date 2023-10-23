@@ -2,6 +2,7 @@
 
 
 namespace APP\Client;
+
 abstract class Compte{
 
     private $titulaire;
