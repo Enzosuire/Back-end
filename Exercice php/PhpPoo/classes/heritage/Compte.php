@@ -1,7 +1,7 @@
 <?php
 
 
-namespace APP\classes;
+namespace APP\heritage;
 abstract class Compte{
 
     private $titulaire;

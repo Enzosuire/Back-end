@@ -1,14 +1,24 @@
 <?php
-require_once('classes/heritage/Compte.php');
-require_once('classes/heritage/CompteCourant.php');
-require_once('classes/heritage/CompteEpargne.php');
-require_once('classes/heritage/Client/Compte.php');
+// require_once('classes/heritage/Compte.php');
+// require_once('classes/heritage/CompteCourant.php');
+// require_once('classes/heritage/CompteEpargne.php');
+// require_once('classes/heritage/Client/Compte.php');
+
+use APP\Autoloader;
 
 
 
-use AP\classes\CompteCourant AS CompteCourant;
+require_once('./classes/Autoloader.php');
+Autoloader::register();
 
-use APP\classes\CompteEpargne AS CompteEpargne;
+use  APP\heritage\Compte as CompteClient;
+
+use APP\Client\Compte;
+
+use APP\heritage\CompteCourant as CompteCourant;
+
+use APP\heritage\CompteEpargne AS CompteEpargne;
+
 
 $compte1 = new CompteCourant("stephane", 1000 , 500);
 
@@ -30,6 +40,7 @@ echo "Le montant après retrait est : ".$compte1->getSolde();
 echo"<pre>";
 var_dump($compte1);
 echo"<pre>";
+
 
 
 //CompteEpargne

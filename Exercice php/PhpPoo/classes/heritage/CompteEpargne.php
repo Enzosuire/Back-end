@@ -1,7 +1,7 @@
 <?php
 
 
-namespace APP\classes;
+namespace APP\heritage;
 
 class CompteEpargne extends Compte{
 

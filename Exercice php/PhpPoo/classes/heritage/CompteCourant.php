@@ -1,7 +1,7 @@
 <?php
 
 
-namespace APP\classes;
+namespace APP\heritage;
 
 class CompteCourant extends Compte {
 
@@ -28,7 +28,7 @@ class CompteCourant extends Compte {
 
     public function reTirer(float $retirer) {
         $solde = parent::getSolde();
-        $decouvert = $this->getDecouvert();
+        $decouvert = $this-> getDecouvert();
         
         if ($retirer > 0 && ($solde - $retirer) >= ($decouvert)) {
             $nouveauSolde = $solde - $retirer;            
