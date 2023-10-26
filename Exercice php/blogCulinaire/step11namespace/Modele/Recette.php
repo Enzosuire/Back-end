@@ -1,6 +1,11 @@
 <?php
 
-require_once ('Modele/Modele.php');
+namespace App\Modele;
+
+use App\Modele\Modele;
+use Exception;
+
+// require_once ('Modele/Modele.php');
 
 class Recette extends Modele{
 

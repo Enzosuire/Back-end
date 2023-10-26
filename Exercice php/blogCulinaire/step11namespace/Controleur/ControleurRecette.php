@@ -1,8 +1,15 @@
 <?php
 
-require_once './Modele/Recette.php';
-require_once './Modele/Commentaire.php';
-require_once './Vue/Vue.php';
+namespace App\Controleur;
+use App\Modele\Recette;
+use App\Modele\Commentaire;
+
+use App\Vue\Vue;
+
+
+// require_once './Modele/Recette.php';
+// require_once './Modele/Commentaire.php';
+// require_once './Vue/Vue.php';
 
 class ControleurRecette
 {
@@ -29,7 +36,7 @@ class ControleurRecette
     public function commenter($auteur, $contenu, $idrecette)
     {
       $this->commentaire->AjouterCommentaire($auteur, $contenu, $idrecette);
-      $this->oneRecipe($idrecette);
+      header("Location: index.php?action=recette&id=" . $idrecette);
       
     }
 

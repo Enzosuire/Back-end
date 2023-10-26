@@ -1,5 +1,6 @@
-
 <?php 
+
+namespace App\Vue;
 
 $this->titre = "Bienvenue sur le BlogCulinaire";
 
@@ -42,6 +43,8 @@ $this->titre = "Bienvenue sur le BlogCulinaire";
     </div>
 </section>
 
+
+<section class="p-5 container">
 <div class="row">
 
     <form action="index.php?action=commenter" method="post" class="mt-3">
@@ -59,13 +62,14 @@ $this->titre = "Bienvenue sur le BlogCulinaire";
         </p>
         <p class="col">
 
-            <input type="submit" class="btn btn-success" value="Commenter">
+            <input type="submit" class="btn btn-warning" value="Envoyer le commentaire">
 
         </p>
     </form>
 
 
 </div>
+</section>
 
 
 

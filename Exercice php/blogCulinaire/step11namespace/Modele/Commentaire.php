@@ -1,6 +1,11 @@
 <?php
 
-require_once ('Modele/Modele.php');
+namespace App\Modele;
+
+use App\Modele\Modele;
+
+
+// require_once ('Modele/Modele.php');
 
 
 class Commentaire  extends Modele{

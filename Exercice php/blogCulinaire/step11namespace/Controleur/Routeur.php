@@ -1,8 +1,18 @@
 <?php
+namespace App\Controleur;
 
-require_once 'ControleurAcceuil.php';
-require_once 'ControleurRecette.php';
-require_once './Vue/Vue.php';
+
+use App\Controleur\ControleurAccueil;
+use App\Controleur\ControleurRecette;
+
+use App\Vue\Vue;
+
+use Exception;
+
+
+// require_once 'ControleurAcceuil.php';
+// require_once 'ControleurRecette.php';
+// require_once './Vue/Vue.php';
 
 
 class Routeur 
