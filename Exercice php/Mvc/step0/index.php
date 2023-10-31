@@ -1,12 +1,20 @@
-
 <?php
 
-require ('Model.php');
+require ("controller.php");
 
-$req = getCountries();
+ accueil();
+
+// require ('./Model.php');
+
+// $req = getCountries();
 
 
-require ('countries.View.php');
+// require ('countries.View.php');
+
+
+
+
+
 
 
 
