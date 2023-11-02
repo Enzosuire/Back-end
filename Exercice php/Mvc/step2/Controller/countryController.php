@@ -36,12 +36,10 @@ $result = saveCountryDetail($country_id, $label, $value);
 var_dump($result);
 if ($result == false) {
 
-    die("Erreur: impossible d'ajouter le nouveau détail");
+    throw new Exception("Erreur: impossible d'ajouter le nouveau détail");
 } else {
-
     header('Location: index.php?action=details&id='.$country_id);
 
-   
 
 }
 

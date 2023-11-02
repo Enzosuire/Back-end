@@ -21,16 +21,16 @@ try {
                 if (isset($_POST['label'])) {
                     if (isset($_POST['value'])) {
 
-                  addCountryDetail($_GET['countryId'], $_POST['label'], $_POST['value']);
+                        addCountryDetail($_GET['countryId'], $_POST['label'], $_POST['value']);
+                    } else {
+                        throw new Exception("Erreur : valeur non définie");
+                    }
+                } else {
+                    throw new Exception("Erreur : clé non valide");
+                }
             } else {
-                throw new Exception("Erreur : valeur non définie");
+                throw new Exception("Erreur : Identifiant de pays bon valide");
             }
-        } else {
-            throw new Exception("Erreur : clé non valide");
-        }
-        } else {
-            throw new Exception("Erreur : Identifiant de pays bon valide");
-        }
         } else {
             throw new Exception("Erreur : action non valide");
         }
@@ -43,9 +43,6 @@ try {
     $line = $e->getLine();
 
     require('./View/errorView.php');
-    
-    
-  
 }
 
 
@@ -56,15 +53,3 @@ try {
 
 
 // require ('countries.View.php');
-
-
-
-
-
-
-
-
-
-
-
-
